@@ -8,7 +8,7 @@ public class SpriderControler {
 
 	public static void main(String[] args) {
 		spriderLiePin();
-//		spriderLaGou();
+		// spriderLaGou();
 	}
 
 	public static void spriderLiePin() {
@@ -21,7 +21,7 @@ public class SpriderControler {
 		List<Entry<String, Integer>> list = liePin.orderByMap();
 		for (int i = 0; i < list.size(); i++) {
 			String id = list.get(i).toString();
-			System.out.println(id);
+			System.out.println("- " + id);
 		}
 	}
 

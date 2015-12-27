@@ -1,5 +1,4 @@
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,10 +19,10 @@ public abstract class JobInfo {
 	private String description;// 职位描述
 
 	private Map<String, Integer> specialySkills = new Hashtable<String, Integer>();// 存储所有专业技能与出现次数
-	
-	// 所有两个字母以上的单词认为是专业名词
+
+	// 所有三个字母以上的单词认为是专业名词
 	public void setSpecialySkill(String content) {
-		Pattern pattern = Pattern.compile("[a-zA-Z]{2,}");
+		Pattern pattern = Pattern.compile("[a-zA-Z]{3,}");
 		Matcher matcher = pattern.matcher(content);
 		while (matcher.find()) {
 			putSkill(matcher.group());
@@ -51,15 +50,15 @@ public abstract class JobInfo {
 	// 对map按照专业技能出现次数进行排序，并返回list
 	public List<Entry<String, Integer>> orderByMap() {
 		Iterator<Map.Entry<String, Integer>> it = specialySkills.entrySet().iterator();
-		while (it.hasNext()){
+		while (it.hasNext()) {
 			Map.Entry<String, Integer> entry = it.next();
 			// 筛选掉出现次数少于10次的
-			if (entry.getValue() < 10){
+			if (entry.getValue() < 10) {
 				it.remove();
 				continue;
 			}
 			// 筛选掉java web ee等无用单词
-			if ("java".equals(entry.getKey()) || "web".equals(entry.getKey()) || "ee".equals(entry.getKey()) ){
+			if ("null".equals(entry.getKey()) || "and".equals(entry.getKey()) || "web".equals(entry.getKey())) {
 				it.remove();
 			}
 		}
@@ -72,7 +71,7 @@ public abstract class JobInfo {
 		});
 		return list;
 	}
-	
+
 	@Override
 	public String toString() {
 		String result = "";

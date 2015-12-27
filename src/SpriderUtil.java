@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -12,11 +11,11 @@ import java.net.URL;
 public class SpriderUtil {
 
 	private static SpriderUtil uniqueInstance = new SpriderUtil();
-	
-	public static SpriderUtil getInstance(){
+
+	public static SpriderUtil getInstance() {
 		return uniqueInstance;
 	}
-	
+
 	// 根据url获取html内容
 	public String getHtmlContent(String urlStr) {
 		BufferedReader reader = null;
@@ -61,25 +60,25 @@ public class SpriderUtil {
 		}
 		return str;
 	}
-	
+
 	// 把content写入本地path路径中
-		public void saveContent(String path, String content) {
-			BufferedWriter writer = null;
+	public void saveContent(String path, String content) {
+		BufferedWriter writer = null;
+		try {
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path, true)));
+			writer.write(content);
+			writer.newLine();
+			writer.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
 			try {
-				writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path, true)));
-				writer.write(content);
-				writer.newLine();
-				writer.flush();
+				if (writer != null) {
+					writer.close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					if (writer != null) {
-						writer.close();
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 			}
 		}
+	}
 }
